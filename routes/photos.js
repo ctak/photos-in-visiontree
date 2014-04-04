@@ -9,7 +9,6 @@ var util = require('util');
 module.exports = function (app) {
 
     app.put('/:file', function (req, res, next) {
-        console.log('file: %s', req.params.file);
         req.pipe(fs.createWriteStream(__dirname + '/../tmp/' + req.params.file));
         res.send('Okay');
     });
@@ -28,7 +27,7 @@ module.exports = function (app) {
         });
     });
 
-    app.del('/p/:file', function (req, res, next) {
+    app.del('/:file', function (req, res, next) {
         var path = __dirname + '/../tmp/' + req.params.file;
 
         fs.exists(path, function (exists) {
