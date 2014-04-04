@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
+    console.log('################ env:%s', "development");
   app.use(express.errorHandler());
 }
 
