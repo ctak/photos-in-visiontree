@@ -9,8 +9,11 @@ var util = require('util');
 module.exports = function (app) {
 
     app.put('/:file', function (req, res, next) {
-        req.pipe(fs.createWriteStream(__dirname + '/../tmp/' + req.params.file));
-        res.send('Okay');
+        var ws = fs.createWriteStream(__dirname + '/../tmp/' + req.params.file);
+        req.pipe(ws, {end: false});
+        req.on('end', function () {
+            res.send('Okay');
+        });
     });
 
     app.get('/:file', function (req, res, next) {
